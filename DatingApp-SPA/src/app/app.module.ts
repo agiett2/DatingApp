@@ -5,12 +5,18 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 
 import { HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './components/nav/nav.component';
 import { AuthService } from './services/auth/auth.service';
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { RegisterComponent } from './components/register/register.component';
 import { ErrorInterceptor, ErrorInterceptorProvider } from './services/error interceptor/error.interceptor';
 import { AlertifyService } from './services/alertify/alertify.service';
+import { MemberListComponent } from './components/member-list/member-list.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { ListsComponent } from './components/lists/lists.component';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from './routes';
+import { AuthGuard } from './_guards/auth.guard';
 
 
 @NgModule({
@@ -18,18 +24,23 @@ import { AlertifyService } from './services/alertify/alertify.service';
       AppComponent,
       NavComponent,
       HomeComponent,
-      RegisterComponent
+      RegisterComponent,
+      MemberListComponent,
+      MessagesComponent,
+      ListsComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
-      BsDropdownModule.forRoot()
+      BsDropdownModule.forRoot(),
+      RouterModule.forRoot(appRoutes)
    ],
    providers: [
        AuthService,
        ErrorInterceptorProvider,
-       AlertifyService
+       AlertifyService,
+       AuthGuard
    ],
    bootstrap: [
       AppComponent
